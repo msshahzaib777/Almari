@@ -1,0 +1,13 @@
+.mainpage{
+    width: 100%;
+    height: 88vh;
+}
+
+.aligning{
+    padding: 50%;
+}
+
+.resultpage{
+    min-height: 88vh;
+    width: 100%;
+}

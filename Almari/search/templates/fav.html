@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load Almaritags %}
+{% load static %}
+{% block homeactive %}" href="/{% endblock %}
+{% block title%}Almari - Favorites{% endblock %}
+{% block script %}
+    {% include "script.html" %}
+{% endblock %}
+{% block Qsearch %}
+    <form class="form-inline my-2 my-lg-0" action="/fav?" method="GET">
+        {% csrf_token %}
+        <input name="query" class="form-control mr-sm-2" id="search" type="text" placeholder="Search Favorite List" aria-label="Search">
+        <input name='page' type="hidden" value="1" />
+        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+    </form>
+{% endblock %}
+{% block body %}
+<div class="mt-5 pt-4">
+    <div class="row" style="max-width:95wv; width: 100%">
+        <div class="col-sm-2">
+                <div class="row bg-success text-white m-0 ml-2 my-1 p-2">
+                    Amazon
+                </div>
+                <div class="row text-white bg-info m-0 ml-2 my-1 p-2">
+                    Ebay
+                </div>
+                <div class="row bg-danger text-white m-0 ml-2 my-1 p-2">
+                    Alibaba
+                </div>
+        </div>
+        <div class="col-sm-10">
+            <div class="mb-4 mt-2">
+                <span class="font-weight-bolder mr-4"></span>
+                <div class="d-inline dropdown float-right mr-5">
+                    <button class=" btn btn-secondary dropdown-toggle mr-5" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Sort By
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a id= "low" class="dropdown-item {{link1}}" href="#">Price: Low-High</a>
+                        <a id= "high" class="dropdown-item {{link2}}" href="#">Price: High-Low</a>
+                    </div>
+                </div>
+                <div class=" mt-3 mr-5 pl-5">
+                    {% if q|lenth == 0 %}
+                        <span class="text-muted">No Items to show</span>
+                    {% endif%}
+                </div>
+            </div>
+            <div class="d-flex flex-wrap">
+            {% for prdt in q  %}
+                <div class="card m-2 p-1 text-center {{ prdt.theme }}" style="min-width:175px; width:20%">
+                    <img class="card-img-tops pl-1 pt-1"  width="165vw" height="165vh" src="{{prdt.imglnk}}" alt="{{prdt.title}}" />
+                    <div class="card-body p-1"> 
+                        <div class="card-title" style="height:85px; font-size: 13px">{{ prdt.title | truncatechars:100 }}</div>
+                        <p class="card-text">{{prdt.price}}</p>
+                        <a href="{% url 'remove' Json=prdt.json %}" class="btn btn-light text-dark mb-2">Remove</a>
+                        <a href="{{prdt.link}}" class="btn btn-light text-dark mb-2">Details</a>
+                    </div>
+                </div>  
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>    
+{% endblock%}    
+{% block Pagination %}
+    {% include "Pagination.html" %}
+{% endblock %}

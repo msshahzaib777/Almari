@@ -1,0 +1,42 @@
+{% load Almaritags %}
+{% load static %}
+
+{% if pglink %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if current != 1 %}
+            <li class="page-item">
+                <a class="page-link" id ="previous" href="/search/{{current|add:'-1'}}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" id ="previous" href="/search/{{current|add:'-1'}}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% endif %}
+            {% for i in pagecount %}
+            {% if i != current %}
+                <li class="page-item"><a class="page-link" id="{{i}}" href="/search/{{i}}">{{i}}</a></li>
+            {% else %}
+                <li class="page-item"><a class="page-link">{{i}}</a></li>
+            {% endif %}
+            {% endfor %}
+            {% if current !=  pagecount|index:-1  %}
+            <li class="page-item">
+                <a class="page-link" id="next" href="/search/{{current|add:'1'}}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" id="next" href="/search/{{current|add:'1'}}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}

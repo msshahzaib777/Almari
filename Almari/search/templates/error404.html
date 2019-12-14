@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load Almaritags %}
+{% load static %}
+{% block homeactive %}" href="/{% endblock %}
+{% block title%}Almari - Page Not Found {% endblock %}
+{% block script %}
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Cabin:400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:900" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="{% static '404.css' %}" />
+{% endblock %}
+{% block Qsearch %}
+    {% include "Qsearch.html" %}
+{% endblock %}
+{% block body %}
+<div id="notfound">
+	<div class="notfound">
+		<div class="notfound-404">
+			<h3>Oops! Page not found</h3>
+			<h1><span>4</span><span>0</span><span>4</span></h1>
+		</div>
+		<h2>we are sorry, {{ error }}</h2>
+	</div>
+</div>
+{% endblock %}

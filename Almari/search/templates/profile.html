@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load Almaritags %}
+{% load static %}
+{% block homeactive %}" href="/{% endblock %}
+{% block title%}Almari - Favorites{% endblock %}
+{% block body %}
+<body>
+    <div class="row vh-100 w-100 mx-0 bg-light">
+        <div class="col-4 pl-2">
+            <div class="h-auto p-2 ml-5" style="margin-top:150px">
+                <div class="card m-2 p-1 text-center bg-dark" style="min-width:175px; width:20%">
+                    <img class="card-img-tops pl-1 pt-1"  width="165vw" height="165vh" src="{{ userprofile.image }}" alt="" />
+                    <div class="card-body p-1">
+                            <span class=" d-inline text-white ">Username: </span> 
+                        <div class=" d-inline card-title text-muted font-weight-bold">{{ request.user.get_username}}</div>
+                    </div>
+                </div>    
+                <form action="{% url 'change_profile' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input class="mb-3" id="id_image" type="file" name="image">
+                        <input class="form-control btn btn-primary w-50 ml-3" name="button" type="submit" value="Upload">
+                </form> 
+            </div>
+            
+        </div>
+        <div class="col-8">
+            <form action="{% url 'change_password' %}" method="POST">
+                {% csrf_token %}
+                <div class="container pl-5" style="margin-top:150px">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label>Current Password</label>
+                            <div class="form-group pass_show"> 
+                                <input name="pass_c" type="password" value="" class="form-control"> 
+                            </div> 
+                               <label>New Password</label>
+                            <div class="form-group pass_show"> 
+                                <input name="pass_n" type="password" value="" class="form-control"> 
+                            </div> 
+                               <label>Confirm Password</label>
+                            <div class="form-group pass_show"> 
+                                <input name="pass_n2" type="password" value="" class="form-control"> 
+                            </div>
+                            <div class="form-group pass_show"> 
+                                <input class="form-control btn btn-primary " name="button" type="submit" value="Change Password"> 
+                                <label>{{error}}</label>
+                            </div>   
+                        </div>  
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+{% endblock%}

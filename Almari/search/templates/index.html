@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block title%}Almari - One Place Worth More Then Many{% endblock %}
+{% block homeactive %}active{% endblock %}
+{% block homecurrent %}(current){% endblock %} 
+{% block body%}
+    <div class="mainpage mt-5 pt-5"> 
+        <div class="container h-100">
+            <div class="w-100 align-items-center pt-4 pb-4 mr-5">
+                <img class="mx-auto d-block pt-5" src="{% static 'img/title.png' %}"/>
+            </div>
+            <div class="row align-items-center pt-5">
+                <div class="d-block col-8 mx-auto">
+                    <div class="card h-100 border-dark justify-content-center" style="min-width:447.997px"> 
+                        <form class="form-inline align-middle d-inline-block" action="/search" method="GET">
+                        {% csrf_token %}    
+                            <input class="form-control form-control-lg mr-4 w-75" name='query' id="search" type="text" placeholder="Search" aria-label="Search">
+                            <input name='page' type="hidden" value="1" />
+                            <input type="image" name="search" src="{% static 'img/search.png' %}" alt="" width="30" height="30" class="align-middle" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </div>
+{% endblock %}
